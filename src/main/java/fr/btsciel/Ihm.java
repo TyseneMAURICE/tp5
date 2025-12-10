@@ -61,24 +61,30 @@ public class Ihm {
                     break;
                 case 8 :
                     System.out.println("Entrez le nom du coureur que vous voulez ajouté :");
-                    String Nom = In.readString();
+                    String nom = In.readString();
 
                     System.out.println("Entrez le prénom du coureur que vous voulez ajouté :");
-                    String Prenom = In.readString();
+                    String prenom = In.readString();
 
                     System.out.println("Entrez le genre de votre coureur :");
-                    gestionCoureur.ajoutCoureurGenre();
+                    for (int i = 0; i < Genre.values().length; i++) {
+                        System.out.println(i + ". " + Genre.values()[i]);
+                    }
+                    int genre = In.readInteger();
 
                     System.out.println("Entrez la categorie de votre coureur :");
-                    gestionCoureur.ajoutCoureurCategorie();
+                    for (int i = 0; i < Categorie.values().length; i++) {
+                        System.out.println(i + ". " + Categorie.values()[i]);
+                    }
+                    int categorie = In.readInteger();
 
                     System.out.println("Entrez le temps en secondes de votre coureur :");
-                    int saisieTemps = In.readInteger();
-                    LocalTime c = LocalTime.ofSecondOfDay(saisieTemps);
+                    int lt = In.readInteger();
+                    LocalTime temps = LocalTime.ofSecondOfDay(lt);
 
-                    gestionCoureur.SauvegardeCoureur();
-
+                    gestionCoureur.AjoutCoureur(nom,prenom,genre,categorie,lt);
                     break;
+
                 case 9:
                     //Supprimer un coureur
                     break;

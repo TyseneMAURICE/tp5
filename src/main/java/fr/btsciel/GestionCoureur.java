@@ -66,20 +66,12 @@ public class GestionCoureur {
         coureurs.sort(Comparator.comparing(Coureur::getCategorie).reversed());
     }
 
-
-    public void ajoutCoureurGenre() {
-
-        for (int i = 0; i < Genre.values().length; i++) {
-            System.out.println(i + ". " + Genre.values()[i]);
-        }
-        int saisieDuGenre = In.readInteger();
-    }
-
-    public void ajoutCoureurCategorie() {
-        for (int i = 0; i < Categorie.values().length; i++) {
-            System.out.println(i + ". " + Categorie.values()[i]);
-        }
-        int saisieCategorie = In.readInteger();
+    public void AjoutCoureur(String nom ,String prenom,int genre,int categorie,int lt) {
+        Genre genre1 = Genre.values()[genre];
+        Categorie categorie1 = Categorie.values()[categorie];
+        LocalTime lt1 = LocalTime.ofSecondOfDay(lt);
+        Coureur c1 = new Coureur(nom,prenom,genre1,categorie1,lt1);
+        coureurs.add(c1);
     }
 
 
