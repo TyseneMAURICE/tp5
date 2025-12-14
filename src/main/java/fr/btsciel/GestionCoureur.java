@@ -4,6 +4,7 @@ import fr.btsciel.clavier.In;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,20 +24,20 @@ public class GestionCoureur {
         lectureFichier();
     }
 
-    private void lectureFichier()throws IOException {
+    private void lectureFichier() throws IOException {
 
-            br = Files.newBufferedReader(fichier);
-            while (br.ready()) {
-                String line = br.readLine();
-                if (line != null) {
-                    String[] s = line.split(",");
-                    if (s.length == 5) {
-                        Coureur coureur = new Coureur(s[1].trim().toUpperCase(), s[2].trim(), Genre.valueOf(s[0].trim()), Categorie.valueOf(s[3].trim()), LocalTime.ofSecondOfDay(Integer.parseInt(s[4].trim())));
-                        coureurs.add(coureur);
-                    }
+        br = Files.newBufferedReader(fichier);
+        while (br.ready()) {
+            String line = br.readLine();
+            if (line != null) {
+                String[] s = line.split(",");
+                if (s.length == 5) {
+                    Coureur coureur = new Coureur(s[1].trim().toUpperCase(), s[2].trim(), Genre.valueOf(s[0].trim()), Categorie.valueOf(s[3].trim()), LocalTime.ofSecondOfDay(Integer.parseInt(s[4].trim())));
+                    coureurs.add(coureur);
                 }
             }
-            br.close();
+        }
+        br.close();
 
     }
 
@@ -66,18 +67,19 @@ public class GestionCoureur {
         coureurs.sort(Comparator.comparing(Coureur::getCategorie).reversed());
     }
 
-    public void AjoutCoureur(String nom ,String prenom,int genre,int categorie,int lt) {
+    public void AjoutCoureur(String nom, String prenom, int genre, int categorie, int lt) {
         Genre genre1 = Genre.values()[genre];
         Categorie categorie1 = Categorie.values()[categorie];
         LocalTime lt1 = LocalTime.ofSecondOfDay(lt);
-        Coureur c1 = new Coureur(nom,prenom,genre1,categorie1,lt1);
+        Coureur c1 = new Coureur(nom, prenom, genre1, categorie1, lt1);
         coureurs.add(c1);
     }
 
 
     public void SauvegardeCoureur() throws IOException {
 
-        bw = Files.newBufferedWriter(fichier);
+        bw = new BufferedWriter(new FileWriter("course.txt"));
+        //écrase le fichier pour le remplacer avec les nouvelles modifications
 
         for (int i = 0; i < coureurs.size(); i++) {
             bw.write(coureurs.get(i).getGenre().toString() + ", "
@@ -88,15 +90,27 @@ public class GestionCoureur {
             bw.newLine();
 
 
-            bw.close();
-
         }
+        bw.close();
     }
 
+    public void SauvegardeGlobal() throws IOException {
 
-    //public void supprimerCoureur() throws IOException {}
+        bw = new BufferedWriter(new FileWriter("course.txt"));
+        //écrase le fichier pour le remplacer avec les nouvelles modifications
 
+    }
 
+    public boolean supprimerCoureur(int indiceCoureur) throws IOException {
+
+        int CoureurSupprimer = indiceCoureur - 1;
+
+        if (CoureurSupprimer < 0 || CoureurSupprimer >= coureurs.size()) {
+            return false; //si le numéro est invalide
+        }
+        coureurs.remove(CoureurSupprimer);
+        return true;
+    }
 
 }
 
