@@ -9,7 +9,6 @@ public class Ihm {
     public static void main(String[] args) {
         try {
 
-
             GestionCoureur gestionCoureur = new GestionCoureur();
             boolean continuer = true;
             boolean flag;
@@ -44,27 +43,27 @@ public class Ihm {
                         flag = true;
                         break;
                     case 2:
-                        gestionCoureur.TriDuNom();
+                        gestionCoureur.triDuNom();
                         flag = true;
                         break;
                     case 3:
-                        gestionCoureur.TriDuNomDecroissant();
+                        gestionCoureur.triDuNomDecroissant();
                         flag = true;
                         break;
                     case 4:
-                        gestionCoureur.TriDuPrenom();
+                        gestionCoureur.triDuPrenom();
                         flag = true;
                         break;
                     case 5:
-                        gestionCoureur.TriDuPrenomDecroissant();
+                        gestionCoureur.triDuPrenomDecroissant();
                         flag = true;
                         break;
                     case 6:
-                        gestionCoureur.TriClassement();
+                        gestionCoureur.triClassement();
                         flag = true;
                         break;
                     case 7:
-                        gestionCoureur.TriClassementDecroissant();
+                        gestionCoureur.triClassementDecroissant();
                         flag = true;
                         break;
                     case 8:
@@ -89,30 +88,39 @@ public class Ihm {
                         System.out.println("Entrez le temps en secondes de votre coureur :");
                         int lt = In.readInteger();
                         LocalTime temps = LocalTime.ofSecondOfDay(lt);
-                        gestionCoureur.AjoutCoureur(nom, prenom, genre, categorie, lt);
-                        gestionCoureur.SauvegardeCoureur();
+                        gestionCoureur.ajoutCoureur(nom, prenom, genre, categorie, lt);
+                        gestionCoureur.sauvegardeCoureur();
                         break;
 
                     case 9:
                         System.out.println("Numéro du coureur à supprimer :");
                         int numero = In.readInteger();
 
-                        boolean ok = gestionCoureur.supprimerCoureur(numero);
+                        boolean flag1 = gestionCoureur.supprimerCoureur(numero); //verifie si le numero est dans la liste
 
-                        if (ok) {
-                            gestionCoureur.SauvegardeGlobal();
+                        if (flag1) {
+                            gestionCoureur.sauvegardeGlobal();
                             System.out.println("Coureur supprimé");
                         } else {
                             System.out.println("Numéro invalide");
                         }
-
                         break;
 
-                    case 10:
-                        //Modifier un coureur
+                    case 10 :
+                        System.out.println("Entrez le numero du coureur que vous voulez supprimé :");
+                        int num = In.readInteger();
+                        System.out.println("""
+                        Que voulez-vous changé ? :
+                        1- Genre
+                        2- Categorie 
+                        3- Nom
+                        4- Prenom
+                        5- Temps
+                       """);
                         break;
+
                     case 11:
-                        gestionCoureur.SauvegardeCoureur();
+                        gestionCoureur.sauvegardeCoureur();
                         System.out.println("Liste des coureurs sauvegardé");
                         break;
                     default:
@@ -131,7 +139,7 @@ public class Ihm {
                     }
                 }
 
-                System.out.println("\t--------------------------\n");
+                System.out.println("\t------------------------------------------------------------\n");
             }
 
 

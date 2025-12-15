@@ -1,7 +1,5 @@
 package fr.btsciel;
 
-import fr.btsciel.clavier.In;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -41,33 +39,33 @@ public class GestionCoureur {
 
     }
 
-    public void TriDuPrenom() {
+    public void triDuPrenom() {
         coureurs.sort(Comparator.comparing(Coureur::getPrenom));
     }
 
-    public void TriDuNom() {
+    public void triDuNom() {
         coureurs.sort(Comparator.comparing(Coureur::getNom));
     }
 
-    public void TriDuNomDecroissant() {
+    public void triDuNomDecroissant() {
         coureurs.sort(Comparator.comparing(Coureur::getNom).reversed());
     }
 
-    public void TriDuPrenomDecroissant() {
+    public void triDuPrenomDecroissant() {
         coureurs.sort(Comparator.comparing(Coureur::getPrenom).reversed());
     }
 
 
-    public void TriClassement() {
+    public void triClassement() {
         coureurs.sort(Comparator.comparing(Coureur::getCategorie));
     }
 
 
-    public void TriClassementDecroissant() {
+    public void triClassementDecroissant() {
         coureurs.sort(Comparator.comparing(Coureur::getCategorie).reversed());
     }
 
-    public void AjoutCoureur(String nom, String prenom, int genre, int categorie, int lt) {
+    public void ajoutCoureur(String nom, String prenom, int genre, int categorie, int lt) {
         Genre genre1 = Genre.values()[genre];
         Categorie categorie1 = Categorie.values()[categorie];
         LocalTime lt1 = LocalTime.ofSecondOfDay(lt);
@@ -76,7 +74,7 @@ public class GestionCoureur {
     }
 
 
-    public void SauvegardeCoureur() throws IOException {
+    public void sauvegardeCoureur() throws IOException {
 
         bw = new BufferedWriter(new FileWriter("course.txt"));
         //écrase le fichier pour le remplacer avec les nouvelles modifications
@@ -94,12 +92,13 @@ public class GestionCoureur {
         bw.close();
     }
 
-    public void SauvegardeGlobal() throws IOException {
+
+    public void sauvegardeGlobal() throws IOException {
 
         bw = new BufferedWriter(new FileWriter("course.txt"));
-        //écrase le fichier pour le remplacer avec les nouvelles modifications
 
     }
+
 
     public boolean supprimerCoureur(int indiceCoureur) throws IOException {
 
@@ -112,5 +111,16 @@ public class GestionCoureur {
         return true;
     }
 
+
+    public boolean modifierCoureur(String nom, String prenom, int genre, int categorie, int lt) {
+        for (int i = 0; i < coureurs.size(); i++) {
+            switch (param){
+                case 1 :
+
+
+            }
+        }
+        return true;
+    }
 }
 
