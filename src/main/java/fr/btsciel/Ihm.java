@@ -90,6 +90,7 @@ public class Ihm {
                         LocalTime temps = LocalTime.ofSecondOfDay(lt);
                         gestionCoureur.ajoutCoureur(nom, prenom, genre, categorie, lt);
                         gestionCoureur.sauvegardeCoureur();
+                        System.out.println("Coureur ajouté !");
                         break;
 
                     case 9:
@@ -100,24 +101,85 @@ public class Ihm {
 
                         if (flag1) {
                             gestionCoureur.sauvegardeGlobal();
-                            System.out.println("Coureur supprimé");
+                            System.out.println("Coureur supprimé !");
                         } else {
                             System.out.println("Numéro invalide");
                         }
                         break;
 
                     case 10 :
-                        System.out.println("Entrez le numero du coureur que vous voulez supprimé :");
-                        int num = In.readInteger();
-                        System.out.println("""
-                        Que voulez-vous changé ? :
-                        1- Genre
-                        2- Categorie 
-                        3- Nom
-                        4- Prenom
-                        5- Temps
-                       """);
-                        break;
+                        for (int i = 0; i < gestionCoureur.coureurs.size(); i++) {
+                            Coureur c = gestionCoureur.coureurs.get(i);
+                            System.out.println((i + 1) + " - "
+                                    + c.getNom() + " "
+                                    + c.getPrenom() + " "
+                                    + c.getCategorie() + " "
+                                    + c.getTemps());
+                        }
+                        System.out.println("Entrez le numero du coureur que vous voulez modifié :");
+                        int num = In.readInteger(); //numero du coureur a modifié
+                        int parametreModifier = 0;
+                        int nouveauGenre = 0;
+                        int nouvelleCategorie = 0;
+                        String nouveauNom = "";
+                        String nouveauPrenom = "";
+                        int nouveauTemps = 0;
+                        int index = num -1;
+                        for (int i = 0; i < gestionCoureur.coureurs.size(); i++) {
+                            System.out.println("Le coureur a modifié est : " + gestionCoureur.coureurs.get(i).getGenre()
+                                    + gestionCoureur.coureurs.get(i).getNom()
+                                    + gestionCoureur.coureurs.get(i).getPrenom()
+                                    + gestionCoureur.coureurs.get(i).getCategorie()
+                                    + gestionCoureur.coureurs.get(i).getTemps());
+                        }
+                                System.out.println("""
+                                        Que voulez vous changé ? :
+                                        1- Genre
+                                        2- Nom
+                                        3- Prenom
+                                        4- Categorie
+                                        5- Temps""");
+
+                                parametreModifier = In.readInteger();
+
+                                switch(parametreModifier){
+                                    case 1:
+                                        for (int j = 0; j < Genre.values().length; j++) {
+                                            System.out.println(j + "." + Genre.values()[j].name());
+                                        }
+                                        nouveauGenre = In.readInteger();
+                                        break;
+
+                                    case 2:
+                                        System.out.println("Tapez le nouveau nom du coureur :");
+                                        nouveauNom = In.readString();
+                                        break;
+
+                                    case 3:
+                                        System.out.println("Tapez le nouveau prenom du coureur :");
+                                        nouveauPrenom = In.readString();
+                                        break;
+
+                                    case 4 :
+                                        System.out.println("Entrez la nouvelle Categorie du coureur :");
+                                        for (int j = 0; j < Categorie.values().length; j++) {
+                                            System.out.println(j + ". " + Categorie.values()[j].name());
+                                        }
+                                        nouvelleCategorie = In.readInteger();
+                                        break;
+
+                                    case 5 :
+                                        System.out.println("Entrez le nouveau temps du coureur (en seconde !!!) :");
+                                        nouveauTemps = In.readInteger();
+                                        break;
+                                }
+                        boolean flag2 = gestionCoureur.modifierCoureur(num, parametreModifier, nouveauGenre, nouveauNom, nouveauPrenom, nouvelleCategorie, nouveauTemps);
+                        if (flag2) {
+                            gestionCoureur.sauvegardeGlobal();
+                            System.out.println("Coureur modifié !");
+                        } else {
+                            System.out.println("Numéro invalide");
+                        }
 
                     case 11:
                         gestionCoureur.sauvegardeCoureur();

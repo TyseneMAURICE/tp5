@@ -42,25 +42,20 @@ public class GestionCoureur {
     public void triDuPrenom() {
         coureurs.sort(Comparator.comparing(Coureur::getPrenom));
     }
-
-    public void triDuNom() {
-        coureurs.sort(Comparator.comparing(Coureur::getNom));
-    }
-
-    public void triDuNomDecroissant() {
-        coureurs.sort(Comparator.comparing(Coureur::getNom).reversed());
-    }
-
     public void triDuPrenomDecroissant() {
         coureurs.sort(Comparator.comparing(Coureur::getPrenom).reversed());
     }
 
+    public void triDuNom() {
+        coureurs.sort(Comparator.comparing(Coureur::getNom));
+    }
+    public void triDuNomDecroissant() {
+        coureurs.sort(Comparator.comparing(Coureur::getNom).reversed());
+    }
 
     public void triClassement() {
         coureurs.sort(Comparator.comparing(Coureur::getCategorie));
     }
-
-
     public void triClassementDecroissant() {
         coureurs.sort(Comparator.comparing(Coureur::getCategorie).reversed());
     }
@@ -72,7 +67,6 @@ public class GestionCoureur {
         Coureur c1 = new Coureur(nom, prenom, genre1, categorie1, lt1);
         coureurs.add(c1);
     }
-
 
     public void sauvegardeCoureur() throws IOException {
 
@@ -91,8 +85,6 @@ public class GestionCoureur {
         }
         bw.close();
     }
-
-
     public void sauvegardeGlobal() throws IOException {
 
         bw = new BufferedWriter(new FileWriter("course.txt"));
@@ -112,15 +104,43 @@ public class GestionCoureur {
     }
 
 
-    public boolean modifierCoureur(String nom, String prenom, int genre, int categorie, int lt) {
-        for (int i = 0; i < coureurs.size(); i++) {
-            switch (param){
-                case 1 :
+    /**
+     * @param num represente le numero du coureur a modifié
+     * @param parametreModifier represente le choix de la modification a apporter au coureur
+     * @param nouveauGenre represente le nouveau genre du coureur après modification
+     * @param nouveauNom represente le nouveau nom du coureur après modification
+     * @param nouveauPrenom represente le nouveau prénom du coureur après modification
+     * @param nouvelleCategorie represente la nouvelle categorie du coureur après modification
+     * @param nouveauTemps represente le nouveau temps du coureur après modification
+     */
+    public boolean modifierCoureur(int num,int parametreModifier,int nouveauGenre,String nouveauNom, String nouveauPrenom, int nouvelleCategorie, int nouveauTemps) {
+        int index = num - 1;
 
-
-            }
+        if (index < 0 || index >= coureurs.size()) {
+            return false;
         }
-        return true;
+        Coureur c = coureurs.get(index);
+                switch (parametreModifier) {
+                    case 1:
+                        Genre genre = Genre.values()[nouveauGenre];
+                        c.setGenre(genre);
+                        break;
+                    case 2:
+                        c.setNom(nouveauNom);
+                        break;
+                    case 3:
+                        c.setPrenom(nouveauPrenom);
+                        break;
+                    case 4:
+                        c.setCategorie(Categorie.values()[nouvelleCategorie]);
+                        break;
+                    case 5:
+                        c.setTemps(LocalTime.ofSecondOfDay(nouveauTemps));
+                        break;
+
+                }
+                return true;
     }
+
 }
 
