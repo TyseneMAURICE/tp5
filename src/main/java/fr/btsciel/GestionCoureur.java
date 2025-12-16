@@ -85,11 +85,11 @@ public class GestionCoureur {
         }
         bw.close();
     }
-    public void sauvegardeGlobal() throws IOException {
-
-        bw = new BufferedWriter(new FileWriter("course.txt"));
-
-    }
+//    public void sauvegardeGlobal() throws IOException {
+//
+//        bw = new BufferedWriter(new FileWriter("course.txt"));
+//
+//    }
 
 
     public boolean supprimerCoureur(int indiceCoureur) throws IOException {

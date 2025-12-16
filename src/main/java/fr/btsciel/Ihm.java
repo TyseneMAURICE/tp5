@@ -96,11 +96,9 @@ public class Ihm {
                     case 9:
                         System.out.println("Numéro du coureur à supprimer :");
                         int numero = In.readInteger();
-
                         boolean flag1 = gestionCoureur.supprimerCoureur(numero); //verifie si le numero est dans la liste
-
                         if (flag1) {
-                            gestionCoureur.sauvegardeGlobal();
+                            gestionCoureur.sauvegardeCoureur();
                             System.out.println("Coureur supprimé !");
                         } else {
                             System.out.println("Numéro invalide");
@@ -125,14 +123,18 @@ public class Ihm {
                         String nouveauPrenom = "";
                         int nouveauTemps = 0;
                         int index = num -1;
-                        for (int i = 0; i < gestionCoureur.coureurs.size(); i++) {
-                            System.out.println("Le coureur a modifié est : " + gestionCoureur.coureurs.get(i).getGenre()
-                                    + gestionCoureur.coureurs.get(i).getNom()
-                                    + gestionCoureur.coureurs.get(i).getPrenom()
-                                    + gestionCoureur.coureurs.get(i).getCategorie()
-                                    + gestionCoureur.coureurs.get(i).getTemps());
+                        if (index >= 0 && index < gestionCoureur.coureurs.size()) {
+                            Coureur c = gestionCoureur.coureurs.get(index);
+                            System.out.println("Le coureur à modifier est : "
+                                    + c.getGenre() + " "
+                                    + c.getNom() + " "
+                                    + c.getPrenom() + " "
+                                    + c.getCategorie() + " "
+                                    + c.getTemps());
+                        } else {
+                            System.out.println("Numéro invalide");
                         }
-                                System.out.println("""
+                        System.out.println("""
                                         Que voulez vous changé ? :
                                         1- Genre
                                         2- Nom
@@ -140,7 +142,7 @@ public class Ihm {
                                         4- Categorie
                                         5- Temps""");
 
-                                parametreModifier = In.readInteger();
+                        parametreModifier = In.readInteger();
 
                                 switch(parametreModifier){
                                     case 1:
@@ -175,11 +177,12 @@ public class Ihm {
                                 }
                         boolean flag2 = gestionCoureur.modifierCoureur(num, parametreModifier, nouveauGenre, nouveauNom, nouveauPrenom, nouvelleCategorie, nouveauTemps);
                         if (flag2) {
-                            gestionCoureur.sauvegardeGlobal();
+                            gestionCoureur.sauvegardeCoureur();
                             System.out.println("Coureur modifié !");
                         } else {
                             System.out.println("Numéro invalide");
                         }
+                    break;
 
                     case 11:
                         gestionCoureur.sauvegardeCoureur();
