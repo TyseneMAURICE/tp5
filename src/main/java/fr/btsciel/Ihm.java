@@ -94,6 +94,15 @@ public class Ihm {
                         break;
 
                     case 9:
+                        //affichage de la liste
+                        for (int i = 0; i < gestionCoureur.coureurs.size(); i++) {
+                            Coureur c = gestionCoureur.coureurs.get(i);
+                            System.out.println((i + 1) + " - "
+                                    + c.getNom() + " "
+                                    + c.getPrenom() + " "
+                                    + c.getCategorie() + " "
+                                    + c.getTemps());
+                        }
                         System.out.println("Numéro du coureur à supprimer :");
                         int numero = In.readInteger();
                         boolean flag1 = gestionCoureur.supprimerCoureur(numero); //verifie si le numero est dans la liste
@@ -106,6 +115,7 @@ public class Ihm {
                         break;
 
                     case 10 :
+                        //affichage de la liste
                         for (int i = 0; i < gestionCoureur.coureurs.size(); i++) {
                             Coureur c = gestionCoureur.coureurs.get(i);
                             System.out.println((i + 1) + " - "

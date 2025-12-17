@@ -15,7 +15,6 @@ public class GestionCoureur {
     ArrayList<Coureur> coureurs = new ArrayList();
     BufferedWriter bw;
     Path fichier = Paths.get("course.txt");
-    Path fichier1 = Paths.get("course1.txt");
     BufferedReader br;
 
     public GestionCoureur() throws IOException {
@@ -36,7 +35,6 @@ public class GestionCoureur {
             }
         }
         br.close();
-
     }
 
     public void triDuPrenom() {
@@ -60,6 +58,14 @@ public class GestionCoureur {
         coureurs.sort(Comparator.comparing(Coureur::getCategorie).reversed());
     }
 
+
+    /**
+     * @param nom nom du coureur ajouté
+     * @param prenom prénom du coureur ajouté
+     * @param genre genre du coureur ajouté
+     * @param categorie Catégorie du coureur ajouté
+     * @param lt Temps (en secondes) du coureur ajouté
+     */
     public void ajoutCoureur(String nom, String prenom, int genre, int categorie, int lt) {
         Genre genre1 = Genre.values()[genre];
         Categorie categorie1 = Categorie.values()[categorie];
@@ -80,18 +86,17 @@ public class GestionCoureur {
                     + coureurs.get(i).getCategorie().toString() + ", "
                     + coureurs.get(i).getTemps().toSecondOfDay());
             bw.newLine();
-
-
         }
         bw.close();
     }
-//    public void sauvegardeGlobal() throws IOException {
-//
-//        bw = new BufferedWriter(new FileWriter("course.txt"));
-//
-//    }
 
 
+
+    /**
+     * @param indiceCoureur numéro attribué au coureur dans la liste
+     * @return true = le coureur est supprimé, false = le numéro est invalide
+     * @throws IOException
+     */
     public boolean supprimerCoureur(int indiceCoureur) throws IOException {
 
         int CoureurSupprimer = indiceCoureur - 1;
